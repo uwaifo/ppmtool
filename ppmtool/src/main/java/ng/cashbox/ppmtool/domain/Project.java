@@ -9,7 +9,7 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Float id;
+    private Long id;
 
 
     private String projectName;
@@ -29,11 +29,11 @@ public class Project {
     //Getter and setters
 
 
-    public Float getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Float id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
