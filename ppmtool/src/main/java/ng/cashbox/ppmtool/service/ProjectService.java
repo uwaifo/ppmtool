@@ -2,6 +2,7 @@ package ng.cashbox.ppmtool.service;
 
 
 import ng.cashbox.ppmtool.domain.Project;
+import ng.cashbox.ppmtool.exception.ProjectIdException;
 import ng.cashbox.ppmtool.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,14 @@ public class ProjectService {
     private ProjectRepository projectRepository;
 
     public Project saveOrUpdateProject(Project project) {
-        //more logic t come
+        //more logic to come
+        try{
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            return projectRepository.save(project);
+        } catch (Exception e) {
+            throw new ProjectIdException("A Project with Identifier " +project.getProjectIdentifier() + " is already taken !");
+        }
 
-        return projectRepository.save(project);
+        //return projectRepository.save(project);
     }
 }

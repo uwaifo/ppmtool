@@ -1,6 +1,10 @@
 package ng.cashbox.ppmtool.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 //Created by Uwaifo Idehenre
@@ -12,14 +16,28 @@ public class Project {
     private Long id;
 
 
+    @NotBlank(message = "Project name is required")
     private String projectName;
+
+    @NotBlank(message = "A project Identifier is required")
+    @Size(min = 4, max = 5, message = "Please enter a 4-5 character identifier")
+    @Column(updatable = true, unique = true)
     private String projectIdentifier;
+
+    @NotBlank(message = "Please enter a project description")
     private String projectDescription;
 
+
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date startDate;
+
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date endDate;
 
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date createdAt;
+
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updatedAt;
 
     //Constructor with no arguments
